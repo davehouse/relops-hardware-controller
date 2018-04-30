@@ -48,7 +48,7 @@ class Command(BaseCommand):
             '-c', str(options['count']),
             '-w', str(options['timeout']),
             host,
-            ');echo $out|tail -2|tr \'\n\' \'\t\'',
+            '|grep -v "^---.* statistics ---$"|tr \'\n\' \'\t\'|tee >&2);echo $out|tail -2',
         ]
 
         return subprocess.check_output(' '.join(call_args),
